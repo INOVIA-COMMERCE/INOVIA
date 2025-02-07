@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         CinetPay.getCheckout({
             transaction_id: Math.floor(Math.random() * 100000000).toString(),
             amount: 100,
-            currency: 'XOF',
+            currency: 'XAF',
             channels: 'ALL',
             description: 'Achat sur Inovia',
             customer_name: "Client",
