@@ -69,7 +69,10 @@ document.getElementById("btn-payer").addEventListener("click", function () {
                 alert("Votre paiement a été effectué avec succès");
                 window.location.reload();
             }
-        });
+        });<script src="https://cdn.cinetpay.com/seamless/main.js"></script>
+<script src="paiement.js"></script>
+</body>
+</html>
 
         CinetPay.onError(function (data) {
             console.log(data);
