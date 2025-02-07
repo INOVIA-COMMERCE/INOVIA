@@ -65,34 +65,40 @@
 
     <script>
         function checkout() {
+            // Vérification de l'API Key et Site ID
+            console.log("API Key: TON_API_KEY");
+            console.log("Site ID: TON_SITE_ID");
+            
             // Configuration CinetPay
             CinetPay.setConfig({
-                apikey: 'TON_API_KEY', // Remplace par ta clé API
-                site_id: 'TON_SITE_ID', // Remplace par ton ID de site
-                notify_url: 'http://mondomaine.com/notify/', // URL pour la notification (à personnaliser)
-                mode: 'SANDBOX' // Utilise 'SANDBOX' pour tester avant de passer en production
+                apikey: 'ton_api_key_ici', // Remplace par ta clé API
+                site_id: 'ton_site_id_ici', // Remplace par ton ID de site
+                notify_url: 'http://mondomaine.com/notify/', // URL pour la notification
+                mode: 'SANDBOX' // Utilise 'SANDBOX' pour tester
             });
 
             // Lancement du paiement CinetPay
+            console.log("Démarrage du paiement...");
             CinetPay.getCheckout({
                 transaction_id: Math.floor(Math.random() * 100000000).toString(),
                 amount: 100, // Montant à payer
-                currency: 'XAF', // Devise modifiée en XAF
+                currency: 'XAF', // Devise XAF
                 channels: 'ALL', // Modes de paiement disponibles
                 description: 'Test de paiement',
-                customer_name: "Joe", // Nom du client
-                customer_surname: "Down", // Prénom du client
-                customer_email: "down@test.com", // Email du client
-                customer_phone_number: "088767611", // Numéro de téléphone
-                customer_address: "BP 0024", // Adresse du client
-                customer_city: "Antananarivo", // Ville
-                customer_country: "CM", // Code ISO du pays
-                customer_state: "CM", // Code ISO de l'état
-                customer_zip_code: "06510" // Code postal
+                customer_name: "Joe",
+                customer_surname: "Down",
+                customer_email: "down@test.com",
+                customer_phone_number: "088767611",
+                customer_address: "BP 0024",
+                customer_city: "Antananarivo",
+                customer_country: "CM",
+                customer_state: "CM",
+                customer_zip_code: "06510"
             });
 
-            // Gestion de la réponse de CinetPay
+            // Vérifier la réponse
             CinetPay.waitResponse(function(data) {
+                console.log("Réponse de CinetPay:", data); // Log de la réponse
                 if (data.status == "REFUSED") {
                     alert("Votre paiement a échoué");
                     showExitButton(); // Afficher bouton "Quitter"
@@ -104,13 +110,12 @@
 
             // Gestion des erreurs
             CinetPay.onError(function(data) {
-                console.log(data);
+                console.error("Erreur CinetPay:", data); // Log des erreurs
             });
         }
 
         // Fonction pour afficher le bouton "Quitter"
         function showExitButton() {
-            // Crée un bouton pour quitter
             let exitButton = document.createElement("button");
             exitButton.textContent = "Quitter";
             exitButton.id = "btn-quit";
