@@ -38,6 +38,7 @@
             text-decoration: none;
             border-radius: 5px;
             margin-top: 20px;
+            display: none; /* Masquer le bouton par défaut */
         }
     </style>
 </head>
@@ -104,27 +105,33 @@
                 CinetPay.waitResponse(function (data) {
                     if (data.status === "REFUSED") {
                         alert("❌ Votre paiement a échoué !");
-                        showExitButton(); // Afficher bouton "Quitter"
+                        showExitButton(); // Afficher le bouton "Quitter"
                     } else if (data.status === "ACCEPTED") {
                         alert("✅ Paiement réussi !");
-                        showExitButton(); // Afficher bouton "Quitter"
+                        showExitButton(); // Afficher le bouton "Quitter"
                     }
                 });
 
                 CinetPay.onError(function (data) {
                     console.error("❌ Erreur CinetPay:", data);
+                    showExitButton(); // Afficher le bouton "Quitter" en cas d'erreur
                 });
             }
 
             // Fonction pour afficher le bouton "Quitter"
             function showExitButton() {
-                let exitButton = document.createElement("button");
-                exitButton.textContent = "Quitter";
-                exitButton.id = "btn-quit";
-                exitButton.onclick = function () {
-                    window.location.href = '/';  // Redirige vers la page d'accueil ou une autre page
-                };
-                document.body.appendChild(exitButton); // Ajouter le bouton à la page
+                let exitButton = document.getElementById("btn-quit");
+                if (!exitButton) {
+                    // Créer le bouton si il n'existe pas déjà
+                    exitButton = document.createElement("button");
+                    exitButton.textContent = "Quitter";
+                    exitButton.id = "btn-quit";
+                    exitButton.onclick = function () {
+                        window.location.href = '/';  // Rediriger vers la page d'accueil ou une autre page
+                    };
+                    document.body.appendChild(exitButton); // Ajouter le bouton à la page
+                }
+                exitButton.style.display = "inline-block"; // Afficher le bouton "Quitter"
             }
         });
     </script>
