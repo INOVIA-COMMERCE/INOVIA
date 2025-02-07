@@ -6,11 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.appendChild(button);
 
    CinetPay.setConfig({
-    apikey: '101488277067a594c6ab76d7.05068804',  // Assure-toi que cette clé est correcte
+    apikey: '101488277067a594c6ab76d7.05068804',
     site_id: 105887404,
     notify_url: 'https://ton-site.com/notify/',
-    mode: 'PRODUCTION'  // Ou 'SANDBOX' pour tester
-});
+    mode: 'PRODUCTION'  
         });
 
         CinetPay.getCheckout({
