@@ -1,57 +1,68 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Vérifie si CinetPay est défini
-    if (typeof CinetPay === 'undefined') {
-        console.error('CinetPay n\'est pas chargé correctement');
-        return;
-    }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
+    <style>
+        .sdk {
+            display: block;
+            position: absolute;
+            background-position: center;
+            text-align: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <script>
+        function checkout() {
+            CinetPay.setConfig({
+                apikey: '',101488277067a594c6ab76d7.05068804//   
+                site_id: '',105887404
+                notify_url: 'http://mondomaine.com/notify/',
+                mode: 'PRODUCTION'
+            });
+            CinetPay.getCheckout({
+                transaction_id: Math.floor(Math.random() * 100000000).toString(), // YOUR TRANSACTION ID
+                amount: 100,
+                currency: 'XOF',
+                channels: 'ALL',
+                description: 'Test de paiement',   
+                 //Fournir ces variables pour le paiements par carte bancaire
+                customer_name:"Joe",//Le nom du client
+                customer_surname:"Down",//Le prenom du client
+                customer_email: "down@test.com",//l'email du client
+                customer_phone_number: "088767611",//l'email du client
+                customer_address : "BP 0024",//addresse du client
+                customer_city: "Antananarivo",// La ville du client
+                customer_country : "CM",// le code ISO du pays
+                customer_state : "CM",// le code ISO l'état
+                customer_zip_code : "06510", // code postal
 
-    // Crée le bouton de paiement CinetPay
-    let button = document.createElement("button");
-    button.textContent = "Payer avec CinetPay"; // Texte du bouton
-    button.id = "btn-payer"; // Ajoute un ID pour cibler le bouton
-
-    // Ajoute un événement 'onclick' au bouton
-    button.onclick = checkout;
-    document.body.appendChild(button); // Ajoute le bouton à la page
-
-    // Fonction qui lance le paiement
-    function checkout() {
-        CinetPay.setConfig({
-            apikey: '101488277067a594c6ab76d7.05068804', // API key de CinetPay
-            site_id: 105887404, // ID de ton site
-            notify_url: 'https://ton-site.com/notify/', // URL de notification (change-la si nécessaire)
-            mode: 'PRODUCTION'  // Mets 'SANDBOX' pour les tests
-        });
-
-        CinetPay.getCheckout({
-            transaction_id: Math.floor(Math.random() * 100000000).toString(),
-            amount: 100,  // Montant du paiement
-            currency: 'XOF',
-            channels: 'ALL',
-            description: 'Achat sur Inovia', // Description de la commande
-            customer_name: "Client",
-            customer_surname: "Inovia",
-            customer_email: "client@inovia.com",
-            customer_phone_number: "677000000",
-            customer_address: "BP 0024",
-            customer_city: "Douala",
-            customer_country: "CM",
-            customer_state: "CM",
-            customer_zip_code: "06510"
-        });
-
-        // Gestion des réponses de CinetPay
-        CinetPay.waitResponse(function (data) {
-            if (data.status === "REFUSED") {
-                alert("Votre paiement a échoué");
-            } else if (data.status === "ACCEPTED") {
-                alert("Paiement réussi !");
-            }
-        });
-
-        // Gestion des erreurs
-        CinetPay.onError(function (data) {
-            console.error(data);
-        });
-    }
-});
+            });
+            CinetPay.waitResponse(function(data) {
+                if (data.status == "REFUSED") {
+                    if (alert("Votre paiement a échoué")) {
+                        window.location.reload();
+                    }
+                } else if (data.status == "ACCEPTED") {
+                    if (alert("Votre paiement a été effectué avec succès")) {
+                        window.location.reload();
+                    }
+                }
+            });
+            CinetPay.onError(function(data) {
+                console.log(data);
+            });
+        }
+    </script>
+</head>
+<body>
+    </head>
+    <body>
+        <div class="sdk">
+            <h1>SDK SEAMLESS</h1>
+            <button onclick="checkout()">Checkout</button>
+        </div>
+    </body>
+</html>  
