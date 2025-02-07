@@ -1,5 +1,10 @@
-
 document.addEventListener("DOMContentLoaded", function () {
+    // Vérifie si CinetPay est défini
+    if (typeof CinetPay === 'undefined') {
+        console.error('CinetPay n\'est pas chargé correctement');
+        return;
+    }
+
     // Crée le bouton de paiement CinetPay
     let button = document.createElement("button");
     button.textContent = "Payer avec CinetPay"; // Texte du bouton
