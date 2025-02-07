@@ -13,6 +13,15 @@
             top: 50%;
             transform: translate(-50%, -50%);
         }
+        #btn-payer {
+            background-color: #FF0080;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
     <script>
         function checkout() {
@@ -60,8 +69,8 @@
 </head>
 <body>
     <div class="sdk">
-        <h1>SDK SEAMLESS</h1>
-        <button onclick="checkout()">Payer maintenant</button>
+        <h1>Paiement CinetPay</h1>
+        <button id="btn-payer" onclick="checkout()">Payer avec CinetPay</button>
     </div>
 </body>
 </html>
