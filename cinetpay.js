@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
     button.onclick = checkout;
     document.body.appendChild(button);
 
-    function checkout() {
-        CinetPay.setConfig({
-            apikey: '68265673267a5ae17cf5a08.79292594',
-            site_id: 105887404,
-            notify_url: 'https://ton-site.com/notify/',
-            mode: 'PRODUCTION'
+   CinetPay.setConfig({
+    apikey: '101488277067a594c6ab76d7.05068804',  // Assure-toi que cette clé est correcte
+    site_id: 105887404,
+    notify_url: 'https://ton-site.com/notify/',
+    mode: 'PRODUCTION'  // Ou 'SANDBOX' pour tester
+});
         });
 
         CinetPay.getCheckout({
